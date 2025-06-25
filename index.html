@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>名爵征途</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" type="image/x-icon" href="files/logo.png">
+    <meta name="viewport" content="width=640,maximum-scale=4,user-scalable=no">
+    <link rel="stylesheet" rev="stylesheet" href="files/reset.css" type="text/css">
+    <link rel="stylesheet" rev="stylesheet" href="files/global.css" type="text/css">
+    <link rel="stylesheet" rev="stylesheet" href="files/index.css" type="text/css">
+    <link href="files/swiper.min.css" rel="stylesheet">
+    <script src="files/swiper.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="files/chatStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+        /* 修复：允许页面垂直滚动 */
+        body {
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+        
+        /* 拉手客服按钮 - 恢复到右侧 */
+        .vertical-button {
+            position: fixed;
+            left: 0;
+            top: 30%;
+            transform: translateY(-50%);
+            background-color: #165DFF;
+            color: white;
+            padding: 40px 12px;
+            border-radius: 0 18px 18px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            writing-mode: vertical-rl;
+            white-space: nowrap;
+            font-size: 24px;
+            z-index: 100;
+        }
+        
+        /* 移除图标样式 */
+        .vertical-button i {
+            display: none;
+        }
+        
+        /* 画中画样式 - 修改为覆盖式设计 */
+        .pip-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%; /* 覆盖整个宽度 */
+            height: 50%; /* 覆盖下半部分 */
+            border-radius: 10px 10px 0 0; /* 仅保留顶部圆角 */
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            transform: translateY(100%); /* 默认隐藏在底部 */
+            opacity: 0;
+            display: none; /* 初始隐藏 */
+        }
+        
+        .pip-container.visible {
+            transform: translateY(0);
+            opacity: 1;
+            display: block;
+        }
+        
+        /* 增大控制按钮 - 放大30% */
+        .pip-header {
+            background-color: #333;
+            color: white;
+            padding: 10.4px 15.6px; /* 原8px*1.3=10.4px, 12px*1.3=15.6px */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+        
+        .pip-controls {
+            display: flex;
+            gap: 10.4px; /* 原8px*1.3=10.4px */
+        }
+        
+        .pip-controls button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18.2px; /* 原14px*1.3=18.2px */
+        }
+        
+        .pip-iframe {
+            width: 100%;
+            height: calc(100% - 41.6px); /* 原36px*1.3=46.8px */
+            border: none;
+        }
+        
+        /* 右下角蓝标 - 固定图标样式 */
+        .pip-toggle {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #165DFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 9998;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            display: none; /* 默认隐藏，2秒后显示 */
+            
+            /* 图标居中设置 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ban swiper-container">
+        <ul class="swiper-wrapper">
+            <img src="files/logo.gif" alt="" width="640" height="120">
+        </ul>
+    </div>
+    <div class="ban swiper-container">
+        <ul class="swiper-wrapper">
+            <li class="swiper-slide"><img src="files/1.jpg" alt=""></li>
+        </ul>
+    </div>
+
+    <div class="psr">
+        <div class="newbox">
+            <div class="inner">
+                <div class="newin">
+                    <div class="lunleft">
+                        <ul style="left: 459px;">
+                            <li>名爵房间号：331855 名爵征途 以下是下载地址（申请房间可联系在线客服审核通过）</li>
+                            <li>名爵房间号：331855 名爵征途 以下是下载地址（申请房间可联系在线客服审核通过）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cl"></div>
+    <div class="kf" style="padding-top:15px;">
+        <!-- //客服链接 -->
+        <a href="kf.html" target="_blank" class="kf">
+            <img src="files/kf.gif" alt="kf">
+        </a>
+    </div>
+    <div class="cesu">
+        <ul id="cesu">
+            <li>
+                <div class="miaoinpt miaoinpt1">77ms</div>
+                <div class="miaoinpt miaoinpt2">企业微信联系</div>
+                <!-- 进入链接 -->
+                <a href="https://work.weixin.qq.com/kfid/kfc98023856dab2fc48" target="_blank" class="dw">点击联系</a>
+                <span style="display: none;"><em>0.077秒</em></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">77ms</div>
+                <div class="miaoinpt miaoinpt2">名爵H5登录</div>
+                <!-- 进入链接 -->
+                <a href="https://www.mjweb111.xyz/" target="_blank" class="dw">点击进入</a>
+                <span style="display: none;"><em>0.077秒</em></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">...</div>
+                <div class="miaoinpt miaoinpt2">苹果端直接安装</div>
+                <!-- 进入链接 -->
+                <a href="itms-services://?action=download-manifest&url=https://dp28-b0cvaag3budfa8f7.a01.azurefd.net/download/ipa/mj_1.8.4_01_23a.plist"
+                    target="_blank" class="dw">点击安装</a>
+                <span style="display: none;">测速中...<img src="=" border="0" width="1" height="1"
+                        onerror="testresult(this)"></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">77ms</div>
+                <div class="miaoinpt miaoinpt2">名爵下载总站</div>
+                <!-- 进入链接 -->
+                <a href="https://www.mj98.app/" target="_blank" class="dw">点击下载</a>
+                <span style="display: none;"><em>0.077秒</em></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">38ms</div>
+                <div class="miaoinpt miaoinpt2">名爵安卓APP</div>
+                <!-- 进入链接 -->
+                <a href="https://apd.glvroc.com/download/mj_v1.8.4.apk" target="_blank" class="dw">点击下载</a>
+                <span style="display: none;"><em>0.038秒</em></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">38ms</div>
+                <div class="miaoinpt miaoinpt2">名爵安卓APP备用</div>
+                <!-- 进入链接 -->
+                <a href="https://ape.glvroc.com/download/mj_v1.8.4.apk" target="_blank" class="dw">点击下载</a>
+                <span style="display: none;"><em>0.038秒</em></span>
+            </li>
+            <li>
+                <div class="miaoinpt miaoinpt1">38ms</div>
+                <div class="miaoinpt miaoinpt2">名爵安卓APP备用</div>
+                <!-- 进入链接 -->
+                <a href="https://dp28-b0cvaag3budfa8f7.a01.azurefd.net/download/mj_v1.8.4.apk" target="_blank"
+                    class="dw">点击下载</a>
+                <span style="display: none;"><em>0.038秒</em></span>
+            </li>
+        </ul>
+        <script type="text/javascript" src="files/cesu.js"></script>
+    </div>
+
+    <script type="text/javascript" src="files/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="files/demo.js"></script>
+    <script type="text/javascript" src="files/index.js"></script>
+
+    <!-- 右侧竖状悬浮按钮 - 已移除图标 -->
+    <a href="kf1.html" class="vertical-button">
+        <span>拉手联系我</span>
+    </a>
+
+    <!-- 画中画功能 -->
+    <button id="pipToggle" class="pip-toggle">
+        <i class="fa fa-comments"></i> <!-- 固定显示此图标 -->
+    </button>
+    
+    <div id="pipContainer" class="pip-container">
+        <div class="pip-header" id="pipHeader">
+            <span>在线客服</span>
+            <div class="pip-controls">
+                <button id="pipMinimize"><i class="fa fa-window-minimize"></i></button>
+                <button id="pipMaximize"><i class="fa fa-window-maximize"></i></button>
+                <button id="pipClose"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <iframe id="pipIframe" class="pip-iframe" src="https://w1011.ttkefu.com/k/linkurl/?R5s6eT=9794&t5Ys2R=62469&s2N6eL=62587&fgid=9263" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+    </div>
+
+    <script>
+        // 画中画功能实现
+        document.addEventListener('DOMContentLoaded', function() {
+            const pipToggle = document.getElementById('pipToggle');
+            const pipContainer = document.getElementById('pipContainer');
+            const pipHeader = document.getElementById('pipHeader');
+            const pipIframe = document.getElementById('pipIframe');
+            const pipMinimize = document.getElementById('pipMinimize');
+            const pipMaximize = document.getElementById('pipMaximize');
+            const pipClose = document.getElementById('pipClose');
+            
+            let isMaximized = false;
+            let startX, startY, startWidth, startHeight;
+            let autoOpenTimer; // 新增：定时器变量
+
+            // 2秒后自动显示画中画窗口和蓝标
+            setTimeout(() => {
+                pipContainer.classList.add('visible');
+                pipToggle.style.display = 'flex';
+            }, 2000);
+
+            // 切换画中画显示/隐藏（不再切换图标）
+            pipToggle.addEventListener('click', function() {
+                if (pipContainer.classList.contains('visible')) {
+                    pipContainer.classList.remove('visible');
+                    startAutoOpenTimer(); // 新增：关闭时开始计时
+                } else {
+                    pipContainer.classList.add('visible');
+                    clearAutoOpenTimer(); // 新增：打开时清除计时
+                }
+            });
+
+            // 最小化
+            pipMinimize.addEventListener('click', function() {
+                pipContainer.classList.remove('visible');
+                startAutoOpenTimer(); // 新增：关闭时开始计时
+            });
+
+            // 最大化/还原
+            pipMaximize.addEventListener('click', function() {
+                if (isMaximized) {
+                    // 还原到下半部分
+                    pipContainer.style.height = '50%';
+                    pipContainer.style.bottom = '0';
+                    pipMaximize.innerHTML = '<i class="fa fa-window-maximize"></i>';
+                } else {
+                    // 最大化
+                    pipContainer.style.height = '100%';
+                    pipContainer.style.bottom = '0';
+                    pipMaximize.innerHTML = '<i class="fa fa-compress"></i>';
+                }
+                isMaximized = !isMaximized;
+            });
+
+            // 关闭
+            pipClose.addEventListener('click', function() {
+                pipContainer.classList.remove('visible');
+                startAutoOpenTimer(); // 新增：关闭时开始计时
+            });
+
+            // 拖动功能
+            let isDragging = false;
+
+            pipHeader.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                startX = e.clientX - pipContainer.getBoundingClientRect().left;
+                startY = e.clientY - pipContainer.getBoundingClientRect().top;
+                pipContainer.style.zIndex = 10000;
+                document.body.style.cursor = 'move';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+
+                const x = e.clientX - startX;
+                const y = e.clientY - startY;
+
+                // 确保窗口不会被拖出视口
+                const maxX = window.innerWidth - pipContainer.offsetWidth;
+                const maxY = window.innerHeight - pipContainer.offsetHeight;
+
+                pipContainer.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+                pipContainer.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+                pipContainer.style.bottom = 'auto';
+                pipContainer.style.right = 'auto';
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                document.body.style.cursor = 'default';
+            });
+
+            // 窗口大小改变时，重置最大化状态
+            window.addEventListener('resize', function() {
+                if (isMaximized) {
+                    pipMaximize.click(); // 还原
+                }
+            });
+
+            // 新增：开始自动打开定时器
+            function startAutoOpenTimer() {
+                clearAutoOpenTimer();
+                // 这里的 5000 表示 5 秒，你可以自定义这个时间
+                autoOpenTimer = setTimeout(() => {
+                    pipContainer.classList.add('visible');
+                }, 10000); 
+            }
+
+            // 新增：清除自动打开定时器
+            function clearAutoOpenTimer() {
+                if (autoOpenTimer) {
+                    clearTimeout(autoOpenTimer);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
