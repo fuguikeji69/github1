@@ -1,364 +1,1196 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>名爵征途</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="renderer" content="webkit">
-    <link rel="icon" type="image/x-icon" href="files/logo.png">
-    <meta name="viewport" content="width=640,maximum-scale=4,user-scalable=no">
-    <link rel="stylesheet" rev="stylesheet" href="files/reset.css" type="text/css">
-    <link rel="stylesheet" rev="stylesheet" href="files/global.css" type="text/css">
-    <link rel="stylesheet" rev="stylesheet" href="files/index.css" type="text/css">
-    <link href="files/swiper.min.css" rel="stylesheet">
-    <script src="files/swiper.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="files/chatStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <style>
-        /* 修复：允许页面垂直滚动 */
-        body {
-            overflow-y: auto;
+    <link rel="stylesheet" href="./skin/style.css">
+    <link rel="stylesheet" href="./skin/style_icon.css">
+    <link rel="stylesheet" href="./skin/index.css">
+    <title>红桃K娱乐</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="./skin/0544aa35b27947c89122b31183d19d04.png" type="image/png">
+ <style>
+        /* 赛博朋克霓虹背景 */
+        html {
+            background: #0a0a0f !important;
             min-height: 100vh;
         }
         
-        /* 拉手客服按钮 - 恢复到右侧 */
-        .vertical-button {
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+            background-attachment: fixed !important;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* ===== 视觉冲击动态效果 ===== */
+        
+        /* 霓虹网格 */
+        .neon-grid {
             position: fixed;
+            top: 0;
             left: 0;
-            top: 30%;
-            transform: translateY(-50%);
-            background-color: #165DFF;
-            color: white;
-            padding: 40px 12px;
-            border-radius: 0 18px 18px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            writing-mode: vertical-rl;
-            white-space: nowrap;
-            font-size: 24px;
-            z-index: 100;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
         }
         
-        /* 移除图标样式 */
-        .vertical-button i {
-            display: none;
+        @keyframes grid-move {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
         }
         
-        /* 画中画样式 - 修改为覆盖式设计 */
-        .pip-container {
+        /* 激光束 */
+        .laser-beams {
             position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 100%; /* 覆盖整个宽度 */
-            height: 50%; /* 覆盖下半部分 */
-            border-radius: 10px 10px 0 0; /* 仅保留顶部圆角 */
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
             overflow: hidden;
-            z-index: 9999;
-            transition: all 0.3s ease;
-            transform: translateY(100%); /* 默认隐藏在底部 */
-            opacity: 0;
-            display: none; /* 初始隐藏 */
         }
         
-        .pip-container.visible {
-            transform: translateY(0);
-            opacity: 1;
+        .laser {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ff00ff, transparent);
+            box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+            animation: laser-sweep 3s ease-in-out infinite;
+        }
+        
+        .laser:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .laser:nth-child(2) { left: 50%; animation-delay: 1s; background: linear-gradient(180deg, transparent, #00ffff, transparent); box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+        .laser:nth-child(3) { left: 80%; animation-delay: 2s; }
+        
+        @keyframes laser-sweep {
+            0%, 100% { opacity: 0; transform: translateX(-100px) scaleY(0); }
+            50% { opacity: 1; transform: translateX(0) scaleY(1); }
+        }
+        
+        /* 闪电效果 */
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .bolt {
+            position: absolute;
+            width: 3px;
+            height: 150px;
+            background: linear-gradient(180deg, #ffff00, #ff6600);
+            box-shadow: 0 0 30px #ffff00, 0 0 60px #ff6600;
+            animation: flash 2s infinite;
+            opacity: 0;
+        }
+        
+        .bolt:nth-child(1) { left: 15%; top: 10%; animation-delay: 0.5s; transform: rotate(15deg); }
+        .bolt:nth-child(2) { left: 45%; top: 5%; animation-delay: 1.2s; transform: rotate(-10deg); }
+        .bolt:nth-child(3) { left: 75%; top: 15%; animation-delay: 1.8s; transform: rotate(20deg); }
+        
+        @keyframes flash {
+            0%, 90%, 100% { opacity: 0; }
+            5% { opacity: 1; }
+            10% { opacity: 0; }
+            15% { opacity: 1; }
+            20% { opacity: 0; }
+        }
+        
+        /* 霓虹粒子 */
+        .neon-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            animation: particle-float 8s infinite linear;
+        }
+        
+        .particle:nth-child(odd) { background: #ff00ff; box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        
+        .particle:nth-child(1) { left: 10%; top: 100%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; top: 100%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 40%; top: 100%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 55%; top: 100%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 70%; top: 100%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 85%; top: 100%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 15%; top: 100%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 60%; top: 100%; animation-delay: 7s; }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+        
+        /* 扫描线 */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, #ff00ff, transparent);
+            box-shadow: 0 0 20px #ff00ff;
+            animation: scan 4s linear infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: -5px; }
+            100% { top: 100vh; }
+        }
+        
+        /* 脉冲光环 */
+        .pulse-ring {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(0,255,255,0.3);
+            border-radius: 50%;
+            animation: pulse-expand 3s ease-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .pulse-ring:nth-child(2) { animation-delay: 1s; }
+        .pulse-ring:nth-child(3) { animation-delay: 2s; }
+        
+        @keyframes pulse-expand {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; border-color: rgba(0,255,255,0.5); }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; border-color: rgba(255,0,255,0); }
+        }
+        
+        /* ===== 页面结构 ===== */
+        
+        .page {
+            background: transparent !important;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+        
+        /* app-item 使用 bg3.png */
+        .page .cont-box .app-list .app-item {
+            background: url("./images/bg3.png") no-repeat !important;
+            background-size: 100% 100% !important;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .page .cont-box .notice-bar {
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%) !important;
+            border: 1px solid rgba(0,255,255,0.3);
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 快捷入口图片圆角 */
+        .page .cont-box .app-box a {
+            border-radius: 12px;
+            overflow: hidden;
+            display: block;
+            box-shadow: 0 0 15px rgba(255,0,255,0.3);
+            transition: all 0.3s;
+        }
+        .page .cont-box .app-box a:hover {
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+            transform: scale(1.05);
+        }
+        .page .cont-box .app-box a img {
+            border-radius: 12px;
             display: block;
         }
         
-        /* 增大控制按钮 - 放大30% */
-        .pip-header {
-            background-color: #333;
-            color: white;
-            padding: 10.4px 15.6px; /* 原8px*1.3=10.4px, 12px*1.3=15.6px */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-        }
+
+
+.download-text {
+font-weight: 900;
+/* 纵向上下流金：top浅金→中间亮黄金→底部暗鎏金 */
+background: linear-gradient(to bottom, #fff8d2, #ffdd70, #c89c3c);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+-webkit-text-fill-color: transparent;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
         
-        .pip-controls {
-            display: flex;
-            gap: 10.4px; /* 原8px*1.3=10.4px */
-        }
+        /* 原有样式 */
+        .lang_radio { display: none; }
+        .lang_radio_img { vertical-align: unset !important; width: 13px !important; height: 13px !important; margin-top: 0px !important; cursor: pointer; margin-right: 3px !important; margin-top: 4px !important; display: inline; min-height: unset !important; min-width: unset !important; }
+        .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; box-sizing: border-box; position: relative; }
+        .marquee { display: inline-block; padding-left: 10%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .responsive-img { max-width: 100%; height: auto; }
         
-        .pip-controls button {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18.2px; /* 原14px*1.3=18.2px */
-        }
+        /* 客服链接 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { min-height: 100vh; position: relative; overflow-x: hidden; font-family: Arial, "Microsoft Yahei", sans-serif; }
+        .top-links { position: absolute; top: 3%; right: 3%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 40%; }
+        .bottom-link { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); animation: float 2s ease-in-out infinite; z-index: 1000; }
+        .image-link { display: block; transition: all 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+        .image-link img { width: 150px; height: auto; border-radius: 8px; }
+        .image-link:hover { transform: scale(1.1); filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)); }
+        @keyframes float { 0%, 100% { transform: translateY(-50%) translateY(0); } 50% { transform: translateY(-50%) translateY(-10px); } }
+        @media (max-width: 768px) { .top-links { gap: 10px; max-width: 60%; } .bottom-link { right: 10px; } .bottom-link img { width: 100px !important; } }
+        @media (min-width: 1200px) { .top-links { gap: 20px; } }
+    </style>
+</head>
+<body>
+    <!-- 视觉冲击背景元素 -->
+    <div class="neon-grid"></div>
+    
+    <div class="laser-beams">
+        <div class="laser"></div>
+        <div class="laser"></div>
+        <div class="laser"></div>
+    </div>
+    
+    <div class="lightning">
+        <div class="bolt"></div>
+        <div class="bolt"></div>
+        <div class="bolt"></div>
+    </div>
+    
+    <div class="neon-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="scan-line"></div>
+    
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+
+</head>
+
+
         
-        .pip-iframe {
-            width: 100%;
-            height: calc(100% - 41.6px); /* 原36px*1.3=46.8px */
-            border: none;
-        }
+ 
+
+<body>
+    <div id="app" class="page" data-v-app="">
+        <div class="page-cont">
         
-        /* 右下角蓝标 - 固定图标样式 */
-        .pip-toggle {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background-color: #165DFF;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            font-size: 40px;
-            cursor: pointer;
-            z-index: 9998;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-            display: none; /* 默认隐藏，2秒后显示 */
-            
-            /* 图标居中设置 */
+
+            <img src="./skin/lb.webp" class="responsive-img">
+                          <style>
+        /* ========== 在线人数显示样式 ========== */
+        .online-counter {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            margin: 15px auto;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,140,0,0.1));
+            border: 1px solid rgba(255,215,0,0.5);
+            border-radius: 20px;
+            padding: 8px 20px;
+            backdrop-filter: blur(10px);
+            animation: counter-pulse 2s ease-in-out infinite;
         }
+        
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: dot-blink 1s ease-in-out infinite;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .online-text {
+            color: #ffd700;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .online-number {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .online-number.jump {
+            animation: numberJump 0.4s ease-out;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+        }
+        
+        @keyframes numberJump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes dot-blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        @keyframes counter-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+            50% { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
+        }
+        
+        /* ========== 实时提现（奖励墙）样式 ========== */
+        .reward-wall {
+            max-width: 320px;
+            margin: 15px auto 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,140,0,0.1) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(255, 215, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .reward-wall-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .reward-scroll-container {
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .reward-scroll-content {
+            animation: scroll-up 10s linear infinite;
+        }
+        
+        .reward-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            white-space: nowrap;
+            font-size: 12px;
+            border-bottom: 1px dashed rgba(255, 215, 0, 0.2);
+        }
+        
+        .reward-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reward-icon-small {
+            font-size: 14px;
+        }
+        
+        .reward-user {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .reward-action {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .reward-money {
+            color: #ff6b6b;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+        }
+        
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        
+        /* 页面基础样式 */
+
+        
+        h2 {
+            color: #ffd700;
+            margin: 30px 0 15px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .demo-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+a.btn1 {
+  display: inline-block;
+  padding: 3% 3%;
+  text-align: center;
+  text-decoration: none;
+  
+  /* 背景图横向自适应，高度自动 */
+  background-image: url(./images/bg2.png);
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
+  
+  border-radius: 6px;
+}
+
+a.btn1 .download-text {
+  color: #fff;
+  font-size: 14px;
+}
     </style>
-</head>
+<body>
+    
+    <!-- ========== 1. 在线人数 HTML代码 ========== -->
+    
+        <!-- 在线人数显示 -->
+        <div class="online-counter" id="onlineCounter">
+            <div class="online-dot"></div>
+            <span class="online-text">当前在线</span>
+            <span class="online-number" id="onlineNumber">1800
+			</span>
+        </div>
+    
+    
+    <!-- ========== 2. 实时提现 HTML代码 ========== -->
+    
+ 
+    
+    <!-- ========== JavaScript 功能代码 ========== -->
+    <script>
+        // ========== 在线人数动态更新 ==========
+        let currentOnline = 1912;
+        const onlineNumberEl = document.getElementById('onlineNumber');
+        
+        function updateOnlineNumber() {
+            // 随机增减人数（模拟真实波动）
+            const change = Math.floor(Math.random() * 50) - 20;
+            currentOnline += change;
+            // 保持在合理范围
+            if (currentOnline < 800) currentOnline = 800;
+            if (currentOnline > 5000) currentOnline = 5000;
+            
+            // 添加跳动动画
+            onlineNumberEl.classList.add('jump');
+            setTimeout(() => {
+                onlineNumberEl.classList.remove('jump');
+            }, 400);
+            
+            // 格式化数字
+            onlineNumberEl.textContent = currentOnline.toLocaleString();
+        }
+        
+        // 每3秒更新一次在线人数
+        setInterval(updateOnlineNumber, 3000);
+        
+        // ========== 实时提现滚动墙系统 ==========
+        const rewardScrollContent = document.getElementById('rewardScrollContent');
+        const rewardNames = ['张**老板', '李**老板', '王**老板', '刘**老板', '陈**老板', '杨**老板', '赵**老板', '黄**老板', '周**老板', '吴**老板'];
+        const rewardAmounts = ['¥1,888', '¥3,888', '¥5,888', '¥8,888', '¥10,000', '¥18,888', '¥28,888', '¥66,666'];
+        const rewardActions = ['刚提现', '中奖', '充值', '赢得'];
+        
+        function generateRewardItems() {
+            let html = '';
+            // 生成10条数据（5条显示，5条用于循环）
+            for (let i = 0; i < 10; i++) {
+                const randomName = rewardNames[Math.floor(Math.random() * rewardNames.length)];
+                const randomAmount = rewardAmounts[Math.floor(Math.random() * rewardAmounts.length)];
+                const randomAction = rewardActions[Math.floor(Math.random() * rewardActions.length)];
+                html += `
+                    <div class="reward-item">
+                        <span class="reward-icon-small">🎉</span>
+                        <span class="reward-user">${randomName}</span>
+                        <span class="reward-action">${randomAction}</span>
+                        <span class="reward-money">${randomAmount}</span>
+                    </div>
+                `;
+            }
+            rewardScrollContent.innerHTML = html;
+        }
+        
+        // 初始化生成奖励条目
+        generateRewardItems();
+        
+        // 每5秒更新一条数据
+        function updateRewardItem() {
+            const items = rewardScrollContent.querySelectorAll('.reward-item');
+            const randomIndex = Math.floor(Math.random() * items.length);
+            const randomName = rewardNames[Math.floor(Math.random() * rewardNames.length)];
+            const randomAmount = rewardAmounts[Math.floor(Math.random() * rewardAmounts.length)];
+            const randomAction = rewardActions[Math.floor(Math.random() * rewardActions.length)];
+            
+            items[randomIndex].innerHTML = `
+                <span class="reward-icon-small">🎉</span>
+                <span class="reward-user">${randomName}</span>
+                <span class="reward-action">${randomAction}</span>
+                <span class="reward-money">${randomAmount}</span>
+            `;
+        }
+        
+        setInterval(updateRewardItem, 5000);
+    </script>
 
 <body>
-    <div class="ban swiper-container">
-        <ul class="swiper-wrapper">
-            <img src="files/logo.gif" alt="" width="640" height="120">
-        </ul>
-    </div>
-    <div class="ban swiper-container">
-        <ul class="swiper-wrapper">
-            <li class="swiper-slide"><img src="files/1.jpg" alt=""></li>
-        </ul>
-    </div>
+    <div id="app" class="page" data-v-app="">
+        <div class="page-cont">
+            
 
-    <div class="psr">
-        <div class="newbox">
-            <div class="inner">
-                <div class="newin">
-                    <div class="lunleft">
-                        <ul style="left: 459px;">
-                            <li>名爵房间号：331855 名爵征途 以下是下载地址（申请房间可联系在线客服审核通过）</li>
-                            <li>名爵房间号：331855 名爵征途 以下是下载地址（申请房间可联系在线客服审核通过）</li>
-                        </ul>
+            <div class="cont-box" style="margin-top: -18px;">
+
+                <div class="notice-bar">
+                    <img class="img" src="./skin/icon1.png">
+                    <div class="msg-bar">
+                        <div class="marquee-container">
+                            <div class="marquee">
+                                欢迎来到红桃K娱乐，本平台已飞单至官方，请各位老板放心娱乐，有任何问题，请联系网页在线客服！.
+                            </div>
+                        </div>
                     </div>
+                </div>
+               
+                <div class="app-list">
+                    <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/yl.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            有聊 APP
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                          私密聊天社交软件<br><br>24h 在线服务 防失联不封号 安全无风控<br><br>
+千人活跃大群更有免费带车福利领取
+                        </a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link23">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                   下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu23">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa23" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi23"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="https://1689437.com/"><img src="./images/icon9.png" alt=""><span class="download-text">  168 开奖网苹果官方下载</span></a><a class="btn" href="https://1689437.com/"><img src="./images/icon10.png" alt=""><span class="download-text">  168 开奖网安卓官方下载</span></a>
+                                    </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const aaa23 = document.getElementById('aaa23');
+                        const link23 = document.getElementById('link23');
+                        if (link23) {
+                            link23.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://uu.im/';
+                            });
+                        }
+                    </script>
+                    <div id="kefudiv23" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib23"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr" target="_blank"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="name">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a class="kf-item" href="javascript:;"><img class="icon1" src="./skin/qq.png" alt="">
+                                        <div class="cont">
+                                            <p class="name">QQ：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon6.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+
+                    <script>
+                        const kefu23 = document.getElementById('kefu23');
+                        const kefudiv23 = document.getElementById('kefudiv23');
+                        if (kefu23) {
+                            kefu23.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr';
+                            });
+                        }
+                    </script>
+                                        <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067814322337.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            GT138 APP
+                                        </div>
+                                        <div class="link">
+                                        <div class="name">
+                                            房间号:444444
+                                        </div>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                            
+
+                            
+                          </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link20">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+    下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu20">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服  
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa20" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi20"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="tzbvxz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  GT138 APP安卓官方下载</span></a><a class="btn" href="https://bv02.cc/bvpg1xz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  GT138 APP苹果直装下载</span></a>
+                                    <a
+                                        class="btn" id="apppg21"><img src="./images/icon11.png" alt=""><span class="download-text">   GT138 苹果安装教程</span></a><a class="btn" id="anzhuo21"><img src="./images/icon11.png" alt=""><span class="download-text">   GT138 安卓安装教程</span></a></div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link20 = document.getElementById('link20');
+                        const aaa20 = document.getElementById('aaa20');
+                        link20.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            aaa20.style.display = 'block';
+                        });
+                        const closeButton20 = document.getElementById('guanbi20');
+                        const content20 = document.getElementById('aaa20');
+                        closeButton20.addEventListener('click', function() {
+                            content20.style.display = 'none';
+                        });
+                    </script>
+                    <div id="kefudiv20" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib20"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr" target="_blank"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="name">复制安全码</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a class="kf-item" href="javascript:;"><img class="icon1" src="./skin/qq.png" alt="">
+                                        <div class="cont">
+                                            <p class="name">QQ：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon6.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu20 = document.getElementById('kefu20');
+                        const kefudiv20 = document.getElementById('kefudiv20');
+                        if (kefu20) {
+                            kefu20.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr';
+                            });
+                        }
+                    </script>
+                   
+
+                   <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/wl.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            万利 APP
+                                        </div>
+                                           <div class="name">
+                                            房间号:100100
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link22">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                   下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu22">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa22" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi22"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="https://1689437.com/"><img src="./images/icon9.png" alt=""><span class="download-text">  168 开奖网苹果官方下载</span></a><a class="btn" href="https://1689437.com/"><img src="./images/icon10.png" alt=""><span class="download-text">  168 开奖网安卓官方下载</span></a>
+                                    </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const aaa22 = document.getElementById('aaa22');
+                        const link22 = document.getElementById('link22');
+                        if (link22) {
+                            link22.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://168wl.app/';
+                            });
+                        }
+                    </script>
+                    <div id="kefudiv22" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib22"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr" target="_blank"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="name">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a class="kf-item" href="javascript:;"><img class="icon1" src="./skin/qq.png" alt="">
+                                        <div class="cont">
+                                            <p class="name">QQ：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon6.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+
+                    <script>
+                        const kefu22 = document.getElementById('kefu22');
+                        const kefudiv22 = document.getElementById('kefudiv22');
+                        if (kefu22) {
+                            kefu22.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr';
+                            });
+                        }
+                    </script>
+                    
+ <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067939459295.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            名爵 APP
+                                        </div>
+                                        <div class="link">
+                                        <div class="name">
+                                            房间号:100100
+
+                                        </div>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                            
+
+                            
+                          </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link19">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+    下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu19">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服  
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa19" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi19"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="tzmjxz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  名爵 APP安卓官方下载</span></a><a class="btn" href="https://bv02.cc/mjpg1xz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  名爵 APP苹果直装下载</span></a>
+                                                                        <a
+                                        class="btn" id="apppg21"><img src="./images/icon11.png" alt=""><span class="download-text">  名爵 苹果安装教程</span></a><a class="btn" id="anzhuo21"><img src="./images/icon11.png" alt=""><span class="download-text">   名爵 安卓安装教程</span></a></div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link19 = document.getElementById('link19');
+                        const aaa19 = document.getElementById('aaa19');
+                        link19.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            aaa19.style.display = 'block';
+                        });
+                        const closeButton19 = document.getElementById('guanbi19');
+                        const content19 = document.getElementById('aaa19');
+                        closeButton19.addEventListener('click', function() {
+                            content19.style.display = 'none';
+                        });
+                    </script>
+                    <div id="kefudiv19" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib19"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr" target="_blank"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="name">复制安全码</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a class="kf-item" href="javascript:;"><img class="icon1" src="./skin/qq.png" alt="">
+                                        <div class="cont">
+                                            <p class="name">QQ：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon6.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu19 = document.getElementById('kefu19');
+                        const kefudiv19 = document.getElementById('kefudiv19');
+                        if (kefu19) {
+                            kefu19.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+                                window.location.href = 'https://tawk.to/chat/6aec79cccd17f53c34e26ce3/1k6lrnifr';
+                            });
+                        }
+                    </script>
+                   
+
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="cl"></div>
-    <div class="kf" style="padding-top:15px;">
-        <!-- //客服链接 -->
-        <a href="kf.html" target="_blank" class="kf">
-            <img src="files/kf.gif" alt="kf">
-        </a>
-    </div>
-    <div class="cesu">
-        <ul id="cesu">
-            <li>
-                <div class="miaoinpt miaoinpt1">77ms</div>
-                <div class="miaoinpt miaoinpt2">联系微信客服</div>
-                <!-- 进入链接 -->
-                <a href="https://work.weixin.qq.com/kfid/kfc98023856dab2fc48" target="_blank" class="dw">点击联系</a>
-                <span style="display: none;"><em>0.077秒</em></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">77ms</div>
-                <div class="miaoinpt miaoinpt2">名爵H5登录</div>
-                <!-- 进入链接 -->
-                <a href="https://www.mjweb70.xyz/" target="_blank" class="dw">点击进入</a>
-                <span style="display: none;"><em>0.077秒</em></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">...</div>
-                <div class="miaoinpt miaoinpt2">苹果端直接安装</div>
-                <!-- 进入链接 -->
-                <a href="https://bv02.cc/mjpg1xz.html" target="_blank" class="dw">点击安装</a>
-                <span style="display: none;">测速中...<img src="=" border="0" width="1" height="1"
-                        onerror="testresult(this)"></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">77ms</div>
-                <div class="miaoinpt miaoinpt2">名爵下载总站</div>
-                <!-- 进入链接 -->
-                <a href="https://www.mj98.app/" target="_blank" class="dw">点击下载</a>
-                <span style="display: none;"><em>0.077秒</em></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">38ms</div>
-                <div class="miaoinpt miaoinpt2">名爵安卓APP</div>
-                <!-- 进入链接 -->
-                <a href="tzmjxz.html" target="_blank" class="dw">点击下载</a>
-                <span style="display: none;"><em>0.038秒</em></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">38ms</div>
-                <div class="miaoinpt miaoinpt2">名爵安卓APP备用</div>
-                <!-- 进入链接 -->
-                <a href="tzmjxz.html" target="_blank" class="dw">点击下载</a>
-                <span style="display: none;"><em>0.038秒</em></span>
-            </li>
-            <li>
-                <div class="miaoinpt miaoinpt1">38ms</div>
-                <div class="miaoinpt miaoinpt2">名爵安卓APP备用</div>
-                <!-- 进入链接 -->
-                <a href="tzmjxz.html" target="_blank"
-                    class="dw">点击下载</a>
-                <span style="display: none;"><em>0.038秒</em></span>
-            </li>
-        </ul>
-        <script type="text/javascript" src="files/cesu.js"></script>
-    </div>
-
-    <script type="text/javascript" src="files/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="files/demo.js"></script>
-    <script type="text/javascript" src="files/index.js"></script>
-
-    <!-- 右侧竖状悬浮按钮 - 已移除图标 -->
-
-
-    <!-- 画中画功能 -->
-    <button id="pipToggle" class="pip-toggle">
-        <i class="fa fa-comments"></i> <!-- 固定显示此图标 -->
-    </button>
-    
-    <div id="pipContainer" class="pip-container">
-        <div class="pip-header" id="pipHeader">
-            <span>在线客服</span>
-            <div class="pip-controls">
-                <button id="pipMinimize"><i class="fa fa-window-minimize"></i></button>
-                <button id="pipMaximize"><i class="fa fa-window-maximize"></i></button>
-                <button id="pipClose"><i class="fa fa-times"></i></button>
+        <div class="course-dialog show" id="dialog" style="display: none;">
+            <div id="dialogBg" class="bg"></div>
+            <div id="dialogCentera" class="center">
+                <div class="line"></div>
+                <div class="imgModel" id="iosImg">
+                    <div class="teachTitle">苹果安装教程</div><img src="./skin/783d34c4e5fd44b5837e74c2a67fb248.png"></div>
             </div>
         </div>
-        <iframe id="pipIframe" class="pip-iframe" src="https://tawk.to/chat/68684980ce69b4190f3cea4b/1ivblu888" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+        <div class="course-dialog show" id="dialogAn" style="display: none;">
+            <div id="dialogBg" class="bg"></div>
+            <div id="dialogCenter" class="center">
+                <div class="line"></div>
+                <div class="imgModel" id="iosImg">
+                    <div class="teachTitle">安卓安装教程</div><img src="./skin/f360cbbdcbd44c33947db87fcad1b210.png"></div>
+            </div>
+        </div>
     </div>
-
     <script>
-        // 画中画功能实现
-        document.addEventListener('DOMContentLoaded', function() {
-            const pipToggle = document.getElementById('pipToggle');
-            const pipContainer = document.getElementById('pipContainer');
-            const pipHeader = document.getElementById('pipHeader');
-            const pipIframe = document.getElementById('pipIframe');
-            const pipMinimize = document.getElementById('pipMinimize');
-            const pipMaximize = document.getElementById('pipMaximize');
-            const pipClose = document.getElementById('pipClose');
-            
-            let isMaximized = false;
-            let startX, startY, startWidth, startHeight;
-            let autoOpenTimer; // 新增：定时器变量
-
-            // 2秒后自动显示画中画窗口和蓝标
-            setTimeout(() => {
-                
-                pipToggle.style.display = 'flex';
-            }, 2000);
-
-            // 切换画中画显示/隐藏（不再切换图标）
-            pipToggle.addEventListener('click', function() {
-                if (pipContainer.classList.contains('visible')) {
-                    pipContainer.classList.remove('visible');
-                    startAutoOpenTimer(); // 新增：关闭时开始计时
-                } else {
-                    pipContainer.classList.add('visible');
-                    clearAutoOpenTimer(); // 新增：打开时清除计时
-                }
+        const showContentLinks = document.querySelectorAll('[id^="apppg"]');
+        const anzhuo = document.querySelectorAll('[id^="anzhuo"]');
+        const dialog = document.getElementById('dialog');
+        const dialogAn = document.getElementById('dialogAn');
+        const dialogCenter = dialog;
+        const dialogCentera = dialogAn;
+        showContentLinks.forEach(showContentLink => {
+            showContentLink.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dialog.style.display = 'block';
             });
+        });
 
-            // 最小化
-            pipMinimize.addEventListener('click', function() {
-                pipContainer.classList.remove('visible');
-                startAutoOpenTimer(); // 新增：关闭时开始计时
+        anzhuo.forEach(showContentLink => {
+            showContentLink.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dialogAn.style.display = 'block';
             });
+        });
 
-            // 最大化/还原
-            pipMaximize.addEventListener('click', function() {
-                if (isMaximized) {
-                    // 还原到下半部分
-                    pipContainer.style.height = '50%';
-                    pipContainer.style.bottom = '0';
-                    pipMaximize.innerHTML = '<i class="fa fa-window-maximize"></i>';
-                } else {
-                    // 最大化
-                    pipContainer.style.height = '100%';
-                    pipContainer.style.bottom = '0';
-                    pipMaximize.innerHTML = '<i class="fa fa-compress"></i>';
-                }
-                isMaximized = !isMaximized;
-            });
+        document.addEventListener('click', function() {
+            dialog.style.display = 'none';
+            dialogAn.style.display = 'none';
 
-            // 关闭
-            pipClose.addEventListener('click', function() {
-                pipContainer.classList.remove('visible');
-                startAutoOpenTimer(); // 新增：关闭时开始计时
-            });
-
-            // 拖动功能
-            let isDragging = false;
-
-            pipHeader.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                startX = e.clientX - pipContainer.getBoundingClientRect().left;
-                startY = e.clientY - pipContainer.getBoundingClientRect().top;
-                pipContainer.style.zIndex = 10000;
-                document.body.style.cursor = 'move';
-            });
-
-            document.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-
-                const x = e.clientX - startX;
-                const y = e.clientY - startY;
-
-                // 确保窗口不会被拖出视口
-                const maxX = window.innerWidth - pipContainer.offsetWidth;
-                const maxY = window.innerHeight - pipContainer.offsetHeight;
-
-                pipContainer.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-                pipContainer.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-                pipContainer.style.bottom = 'auto';
-                pipContainer.style.right = 'auto';
-            });
-
-            document.addEventListener('mouseup', function() {
-                isDragging = false;
-                document.body.style.cursor = 'default';
-            });
-
-            // 窗口大小改变时，重置最大化状态
-            window.addEventListener('resize', function() {
-                if (isMaximized) {
-                    pipMaximize.click(); // 还原
-                }
-            });
-
-            // 新增：开始自动打开定时器
-            function startAutoOpenTimer() {
-                clearAutoOpenTimer();
-                // 这里的 5000 表示 5 秒，你可以自定义这个时间
-                autoOpenTimer = setTimeout(() => {
-                    pipContainer.classList.add('visible');
-                }, 100000); 
-            }
-
-            // 新增：清除自动打开定时器
-            function clearAutoOpenTimer() {
-                if (autoOpenTimer) {
-                    clearTimeout(autoOpenTimer);
-                }
-            }
         });
     </script>
+   <style>
+    /* 基础样式重置 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        background: url('') no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        font-family: Arial, "Microsoft Yahei", sans-serif;
+    }
+
+    /* 右上角链接容器 */
+    .top-links {
+        position: absolute;
+        top: 3%;
+        right: 3%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 40%;
+    }
+
+    /* 右下角客服链接 - 已修改为固定定位并垂直居中 */
+    .bottom-link {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        animation: float 2s ease-in-out infinite;
+        z-index: 1000; /* 确保图标在所有元素上方 */
+    }
+
+    /* 图片链接通用样式 */
+    .image-link {
+        display: block;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .image-link img {
+        width: 150px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* 悬停效果 */
+    .image-link:hover {
+        transform: scale(1.1); /* 修正缩放值，避免过大 */
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    }
+
+    /* 浮动动画 */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(-50%) translateY(0);
+        }
+        50% {
+            transform: translateY(-50%) translateY(-10px);
+        }
+    }
+
+    /* 手机端适配 */
+    @media (max-width: 768px) {
+        .top-links {
+            gap: 10px;
+            max-width: 60%;
+        }
+        .bottom-link {
+            right: 10px;
+        }
+        .bottom-link img {
+            width: 100px !important;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .top-links {
+            gap: 20px;
+        }
+    }
+</style>
+    <script src="./skin/jquery-2.1.1.min.js"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93b76891fde991b3","version":"2025.4.0-1-g37f21b1","r":1,"token":"5a58923ea5924829b6a8f22fe963063a","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}'
+        crossorigin="anonymous"></script>
+    
 </body>
+
+<body>
 
 </html>
